@@ -10,13 +10,22 @@
     <script src="dist/vue.js"></script>
     <script>
       // 其实传的就是个对象
-      new Vue({
+      let vm = new Vue({
         el: "#app",
-        data: {},
+        data() {
+          return {
+            msg: "hello", // 单一对象
+            item: {
+              // 复合对象
+              name: "test"
+            }
+          };
+        },
         props: {},
         methods: {},
         watch: {}
       });
+      console.log((vm._data.msg = "1"));
     </script>
   </body>
 </html>

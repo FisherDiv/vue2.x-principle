@@ -1,3 +1,4 @@
+import { observer } from "./observer/index"
 // 出事化对象数据
 export function initState(vm) {
   let opts = vm.$options
@@ -17,8 +18,17 @@ export function initState(vm) {
 }
 
 // 初始化data
-function initData() {
+function initData(vm) {
+  let data = vm.$options.data
+  // 1.data有两种形式 1)函数  2）对象
+  // 2.最终返回一个对象
+  // 3.如果不cal的话,这里的this是指向window的
+  data = vm._data = typeof data === 'function' ? data.call(vm) : data
+  // 劫持后的对象
+  // vm._data = data
 
+  // 这里才是真正对数据进行劫持
+  observer(data) // 观测对象
 }
 // 初始化props
 function initPorps() {
