@@ -33,3 +33,15 @@ npm install @babel/preset-env --save-dev // babel预设 高级语法转低级
  "start": "rollup -cw"  // npm run start -c config -w watch
 ```
 
+# 附: github推送代码
+```
+cd ~
+ls -la .ssh // 查看是否有key,若没有，按以下步骤生成
+
+ssh-keygen -t rsa -C"you_email" // 会生成id_rsa及id_rsa.pub
+cat .ssh/id_rsa.pub // 复制里面的内容
+
+- github-> settings-> Develop Keys-> add Key
+
+```
+
