@@ -33,7 +33,8 @@ npm install @babel/preset-env --save-dev // babel预设 高级语法转低级
  "start": "rollup -cw"  // npm run start -c config -w watch
 ```
 
-# 附: github推送代码
+# 附: 
+- github推送代码 (易经不能使用用户名密码推送)
 ```
 cd ~
 ls -la .ssh // 查看是否有key,若没有，按以下步骤生成
@@ -44,4 +45,14 @@ cat .ssh/id_rsa.pub // 复制里面的内容
 - github-> settings-> Develop Keys-> add Key
 
 ```
+
+- 获取令牌方式
+```
+github -> settings -> Developer Settings -> Tokens // 保存好token,刷新会消失
+
+git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git
+
+```
+
+
 
