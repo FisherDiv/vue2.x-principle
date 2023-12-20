@@ -4,8 +4,11 @@
  *  3.对象又是复合型的，所以需要在defineReactive里递归
  *  4.新对象赋值后也需要观测
  */
+
+import {arrayMethods} from "./arr"
 // 观测方法
 export function observer(data) {
+
   if (typeof data !== "object" || data === null) { // 判断非对象
     return data
   }
@@ -19,7 +22,17 @@ export function observer(data) {
 class Observer {
   // 构造器
   constructor(value) {
-    this.walk(value)
+    Object.defineProperty(value, '__ob__', { // 挂载this到属性(观测对象），供arr李调用
+      enumerable: false, // 不可枚举
+      value: this // this 是Observer实例
+    })
+
+    if (Array.isArray(value)) { // 观测数组
+      value.__proto__ = arrayMethods
+      this.observerArray(value)
+    } else { // 观测对象
+      this.walk(value)
+    }
   }
   // 遍历属性
   walk(data) {
@@ -30,9 +43,15 @@ class Observer {
       defineReactive(data,key,value) // 属性劫持
     }
   }
+  // 劫持数组对象的方法 [{name: '张三', age: 12}]
+  observerArray(value) {
+    for (let i = 0; i < value.length; i++) {
+      observer(value[i])
+    }
+  }
 }
 
-// 真正的劫持方法
+// 真正的劫持方法(对象)
 function defineReactive(data, key, value) {
   /**
    * 递归检测，嵌套对像的检测
@@ -56,3 +75,4 @@ function defineReactive(data, key, value) {
     }
   })
 }
+

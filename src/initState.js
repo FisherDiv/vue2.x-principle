@@ -26,6 +26,11 @@ function initData(vm) {
   data = vm._data = typeof data === 'function' ? data.call(vm) : data
   // 劫持后的对象
   // vm._data = data
+  // 将data上所有属性代理到 vm实例上 vm._data.msg => vm.msg
+  for (let key in data) {
+    proxy(vm, "_data", key)
+  }
+
 
   // 这里才是真正对数据进行劫持
   observer(data) // 观测对象
@@ -37,4 +42,15 @@ function initPorps() {
 // 初始化watch
 function initWatch() {
 
+}
+// 把vm._data代理到vm
+function proxy(vm, source, key) {
+  Object.defineProperty(vm, key, {
+    get() {
+      return vm[source][key]
+    },
+    set(newValue) {
+      vm[source][key] = newValue
+    }
+  })
 }

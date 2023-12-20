@@ -18,14 +18,22 @@
             item: {
               // 复合对象
               name: "test"
-            }
+            },
+            list: [1, 2, 3], // 单一数组
+            listObject: [
+              // 对象数组
+              { age: 12 },
+              { age: 21 }
+            ]
           };
         },
         props: {},
         methods: {},
         watch: {}
       });
-      console.log((vm._data.msg = "1"));
+      vm._data.listObject.push({ age: 22 });
+      console.log(vm._data);
+      console.log(vm.msg);
     </script>
   </body>
 </html>
