@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel'
+import serve from 'rollup-plugin-serve'
 
 export default {
   input: './src/index.js', // 入口文件
@@ -14,6 +15,11 @@ export default {
   plugins: [
     babel({
       exclude: 'node_modules/**'
+    }),
+    serve({
+      port: 3000, // 端口
+      contentBase: '', // 为空表示当前路径
+      openPage: '/index.html' //
     })
   ]
 }
