@@ -9,18 +9,23 @@
     <div id="app" name="div">
       hello {{msg}}
       <h1>
-        child<span><i>12</i></span>
+        child<span><i> 12 </i></span>
       </h1>
       <h2>h2chidl</h2>
     </div>
     <script src="dist/vue.js"></script>
     <script>
+      // Vue.Mixin({
+      //   created() {
+      //     console.log("Vue Mixin: created");
+      //   }
+      // });
       // 其实传的就是个对象
       let vm = new Vue({
         el: "#app",
         data() {
           return {
-            msg: "hello", // 单一对象
+            msg: "world", // 单一对象
             item: {
               // 复合对象
               name: "test"
@@ -32,6 +37,9 @@
               { age: 21 }
             ]
           };
+        },
+        created() {
+          console.log("----created-----");
         },
         props: {},
         methods: {},
