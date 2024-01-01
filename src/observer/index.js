@@ -30,7 +30,7 @@ class Observer {
     if (Array.isArray(value)) { // 观测数组
       value.__proto__ = arrayMethods
       this.observerArray(value)
-    } else { // 观测对象
+    } else { // 观测对象, 第一次进来肯定是走这里， data返回的是一个对象
       this.walk(value)
     }
   }
