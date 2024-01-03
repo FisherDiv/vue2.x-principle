@@ -21,6 +21,7 @@ export function renderMixin(Vue) {
     let vm = this;
     let render = vm.$options.render;
     let vnode = render.call(this);
+    // console.log("vnode", vnode); // { tag: div, text: undefined, key: undefined, data: {id: 'app', name:'div'}, children: [...]}
     return vnode;
   };
 }
@@ -46,9 +47,9 @@ function vnode(tag, data, key, children, text) {
 
 /**
  * 创建标签元素
- * @param {*} tag
- * @param {*} data
- * @param  {...any} children
+ * @param {*} tag 标签
+ * @param {*} data attrs属性
+ * @param  {...any} children 子集
  * @returns
  */
 function createElement(tag, data = {}, ...children) {

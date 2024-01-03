@@ -15,11 +15,17 @@
     </div>
     <script src="dist/vue.js"></script>
     <script>
-      // Vue.Mixin({
-      //   created() {
-      //     console.log("Vue Mixin: created");
-      //   }
-      // });
+      /***
+       * 这个必须在实例化之前，因为调用是在相关函数(initState, vm._update ...)前后执行的
+       */
+      Vue.Mixin({
+        created: function mixCreated() {
+          console.log("Vue Mixin: mixCreated");
+        },
+        mounted: function mixMounted() {
+          console.log("Vue Mixin: mixMounted");
+        }
+      });
       // 其实传的就是个对象
       let vm = new Vue({
         el: "#app",
@@ -38,14 +44,15 @@
             ]
           };
         },
-        created() {
-          console.log("----created-----");
+        created: function compCreated() {
+          console.log("----compCreated-----");
         },
         props: {},
         methods: {},
         watch: {}
       });
       vm._data.listObject.push({ age: 22 });
+
       // console.log(vm._data);
       // console.log(vm.msg);
 
