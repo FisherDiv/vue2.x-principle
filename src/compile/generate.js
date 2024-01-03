@@ -5,9 +5,9 @@ const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g; // 匹配 {{}}
  * @returns
  */
 export function generate(el) {
-  console.log(el);
+  // console.log(el);
   let children = genChildren(el);
-  console.log(children);
+  // console.log(children);
   // 拼接方法字符串
   let code = `_c('${el.tag}', ${el.attrs.length ? `${genProps(el.attrs)}` : "undefined"}${
     children ? `,${children}` : ""
@@ -33,12 +33,12 @@ function genChildren(el) {
  * @param {*} node
  */
 function gen(node) {
-  if (node === 1) {
+  if (node.type === 1) {
     // 标签
     return generate(node); //递归
   } else {
     let text = node.text;
-    console.log("text", text);
+    // console.log("text", text);
     if (!defaultTagRE.test(text)) {
       // 纯文本
       return `_v(${JSON.stringify(text)})`; // _v() 解析文本

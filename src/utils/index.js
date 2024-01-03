@@ -43,7 +43,7 @@ function mergeHook(parentVal, childVal) {
  * @param {*} child
  */
 export function mergeOptions(parent, child) {
-  console.log("==", parent, child);
+  // console.log("==", parent, child);
   const options = {};
   // 父有子无
   for (let key in parent) {

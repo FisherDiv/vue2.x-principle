@@ -5,7 +5,7 @@
  * @returns
  */
 export function patch(oldVnode, vnode) {
-  console.log(oldVnode, vnode);
+  // console.log(oldVnode, vnode);
   // 创建dom
   let el = createEl(vnode);
   // 找到父元素
@@ -34,6 +34,6 @@ function createEl(vnode) {
   } else {
     vnode.el = document.createTextNode(text);
   }
-  console.log(vnode.el);
+  // console.log(vnode.el);
   return vnode.el;
 }
