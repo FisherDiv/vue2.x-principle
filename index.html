@@ -8,24 +8,26 @@
   <body>
     <div id="app" name="div">
       hello {{msg}}
+      <h1>直接文本: {{msg}}</h1>
       <h1>
-        child<span><i> 12 </i></span>
+        嵌套文本:<span><i> {{item.name}} </i></span>
       </h1>
-      <h2>h2chidl</h2>
+      <h2>数组: {{list}}</h2>
+      <h2>数组对象: {{listObject}}</h2>
     </div>
     <script src="dist/vue.js"></script>
     <script>
       /***
        * 这个必须在实例化之前，因为调用是在相关函数(initState, vm._update ...)前后执行的
        */
-      Vue.Mixin({
-        created: function mixCreated() {
-          console.log("Vue Mixin: mixCreated");
-        },
-        mounted: function mixMounted() {
-          console.log("Vue Mixin: mixMounted");
-        }
-      });
+      // Vue.Mixin({
+      //   created: function mixCreated() {
+      //     console.log("Vue Mixin: mixCreated");
+      //   },
+      //   mounted: function mixMounted() {
+      //     console.log("Vue Mixin: mixMounted");
+      //   }
+      // });
       // 其实传的就是个对象
       let vm = new Vue({
         el: "#app",
@@ -45,14 +47,14 @@
           };
         },
         created: function compCreated() {
-          console.log("----compCreated-----");
+          // console.log("----compCreated-----");
         },
         props: {},
         methods: {},
         watch: {}
       });
-      vm._data.listObject.push({ age: 22 });
-
+      // vm._data.listObject.push({ age: 22 });
+      // vm.list.push(3);
       // console.log(vm._data);
       // console.log(vm.msg);
 
@@ -61,6 +63,21 @@
        * vue初次渲染 -> 先初始化数据 -> 将模版进行编译 -> 变成render() -> 生成虚拟节点 -> 生成真实dom -> 放到页面
        * 编译方式： template render el (el必须有)
        **/
+
+      /**
+       * 自动更新 Watcher & Dep
+       **/
+      setTimeout(() => {
+        // vm.msg = "update";
+        // vm.item.name = "updated name";
+        vm.list.push(4);
+        vm.listObject.push({ aa: 111 });
+      }, 1000);
+
+      console.log(vm); // 这里其实已经拿到值了，只是没有更新到页面
+      // 如果要更新，必须调用
+      // vm._update(vm._render()); // 手动更新到页面，
+      // 所以当数据变化时自动更新视图，则在对数据监听时需要使用到Watcher和Dep
     </script>
   </body>
 </html>
